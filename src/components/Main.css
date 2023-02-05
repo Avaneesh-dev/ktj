@@ -1,0 +1,47 @@
+.Screen {    
+    font-family: serif;
+    background-image: url("https://images.pexels.com/photos/974316/pexels-photo-974316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+.navtext{
+    color: black;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.h1 {
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background: linear-gradient(#3f3131, #0c0b0b);
+    background-clip: text;
+    -webkit-fill-color: transparent;
+}
+#video-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -1;
+    width: 100%;
+}
+.home{
+    background-color: whitesmoke;
+    padding: 2rem;
+}
+.footer{
+    background-color: #dad4d4;
+}
+.img{
+    min-height: 300px;
+    max-height:700px;
+}
+.header{
+    background-image: url("https://images.pexels.com/photos/113338/pexels-photo-113338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    color:white;
+    font-family: thickfont;
+}
+.teams{
+    background-color: whitesmoke;
+    padding: 2rem;
+}
+
