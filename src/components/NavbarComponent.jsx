@@ -8,18 +8,26 @@ function NavbarComponent(props) {
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => setCollapsed(!collapsed);
   const userName=cookies.get("USER");
+  const logout = ()=>{
+    cookies.remove("USER");
+    console.log("logging out");
+  }
   return (
-    <div className=''>
+    <div>
       <Navbar color='inherit' light expand="md" className="col-12 navtext">
         <NavbarBrand className="col-md-3 col-sm-6">Get A Team</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar className='col-md-9 text-center'>
-          <NavItem className="col-md-2">
+            <NavItem className="col-md-2">
               <NavLink href="home">HOME</NavLink>             
             </NavItem>          
             <NavItem className="col-md-2">
-            <NavLink href="login">{userName?<div>{userName}</div>:<div>LOGIN</div>}</NavLink>              
+            <NavLink href="login">{userName?<div>{userName}</div>:<div>LOGIN</div>}
+            </NavLink>              
+            </NavItem>
+            <NavItem className="col-md-2">
+              <NavLink onClick={(e)=>{logout()}}>Logout</NavLink>             
             </NavItem>          
           </Nav>
         </Collapse>

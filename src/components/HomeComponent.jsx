@@ -73,7 +73,7 @@ function HomeComponent() {
           {user==c.user ? (
           <Button onClick={(e) => handleDelete(e,c)}>Delete</Button>
         ) : (
-          <p className="text-danger">You Are Not Logged in</p>
+          <p className="text-danger">Not Posted by You!</p>
         )}        
         </Card>
       </div>)
