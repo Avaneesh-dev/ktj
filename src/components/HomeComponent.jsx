@@ -10,7 +10,7 @@ function HomeComponent() {
     const [description, setDescription]=useState("");
     const [compe, setCompe]=useState([]);
     const token = cookies.get("TOKEN");
-
+    const user =cookies.get("USER");
     useEffect(()=> {
       const configuration = {
           method: "get",
@@ -25,11 +25,12 @@ function HomeComponent() {
     })
 
     const handleSubmit = (e) => {      
-      {const configuration = {
+      const configuration = {
         headers: {"Authorization": `bearer ${token}`},
           method: "post",
           url: "http://localhost:3000/compe",
           data: {
+            user,
             name,
             members,
             description
@@ -42,7 +43,22 @@ function HomeComponent() {
           console.log(error);
         });
       // prevent the form from refreshing the whole page
-      e.preventDefault();}
+      e.preventDefault();
+    }
+    const handleDelete = (e,c) => {      
+      const configuration = {
+        headers: {"Authorization": `bearer ${token}`},
+          method: "delete",
+          url: `http://localhost:3000/compe/${c._id}`,          
+        };
+        axios(configuration)
+        .then((result) => {console.log(result)})
+        .catch((error) => {
+          error = new Error();
+          console.log(error);
+        });
+      // prevent the form from refreshing the whole page
+      e.preventDefault();
     }
     const Competitions = compe.map((c)=>{
       return(
@@ -51,8 +67,14 @@ function HomeComponent() {
           <CardHeader>{c.name}</CardHeader>
           <CardBody>
             Number of Members needed: {c.members} <br />
-            {c.description}
+            {c.description} <br />
           </CardBody>
+          <Button>Apply</Button>
+          {user==c.user ? (
+          <Button onClick={(e) => handleDelete(e,c)}>Delete</Button>
+        ) : (
+          <p className="text-danger">You Are Not Logged in</p>
+        )}        
         </Card>
       </div>)
     });
