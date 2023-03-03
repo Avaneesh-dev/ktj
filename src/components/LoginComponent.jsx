@@ -22,13 +22,16 @@ function LoginComponent() {
           };
           axios(configuration)
           .then((result) => {
-            console.log(result.data.name);
+            console.log(result.data);
             setRegister(true)
         // set the cookie
         cookies.set("TOKEN", result.data.token, {
             path: "/",
           })
         cookies.set("USER", result.data.name, {
+          path: "/",
+        })
+        cookies.set("USERID", result.data.id, {
           path: "/",
         })
         })
