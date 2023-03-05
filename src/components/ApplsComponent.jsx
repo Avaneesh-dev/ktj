@@ -19,8 +19,14 @@ function ApplsComponent(props) {
         <CardBody>{appls.reason}</CardBody>
         <CardFooter>
           <div className="row">
-            <Button onClick={(e)=>props.updateAppl(e,appls._id, true)}>Accept</Button>
-            <Button onClick={(e)=>props.updateAppl(e,appls._id, false)}>Reject</Button>
+            {appls.status?(
+                <Button>Accepted</Button>)
+            :(
+            <Button onClick={(e)=>props.updateAppl(e,appls._id, true)}>Accept</Button>)}
+            {appls.status===false?(
+                <Button>Rejected</Button>)
+            :(
+            <Button onClick={(e)=>props.updateAppl(e,appls._id, false)}>Reject</Button>)}
           </div>
         </CardFooter>
       </Card>)

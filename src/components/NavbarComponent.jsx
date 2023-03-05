@@ -20,10 +20,10 @@ function NavbarComponent(props) {
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar className='col-md-9 text-center'>
             <NavItem className="col-md-2">
-              <NavLink href="home">HOME</NavLink>             
+              <NavLink href="/home">HOME</NavLink>             
             </NavItem>          
             <NavItem className="col-md-2">
-            <NavLink href="login">{userName?<div>{userName}</div>:<div>LOGIN</div>}
+            <NavLink href="/login">{userName?<div>{userName}</div>:<div>LOGIN</div>}
             </NavLink>              
             </NavItem>
             <NavItem className="col-md-2">

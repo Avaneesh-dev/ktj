@@ -93,6 +93,7 @@ function HomeComponent(props) {
     e.preventDefault();
   };
   const Competitions = props.compe.map((c) => {
+    let result = props.appls.find(({ userid, compe }) => compe===c._id&&userid.name===user)
     return (
       <div key={c._id}>
         <Card>
@@ -124,14 +125,23 @@ function HomeComponent(props) {
                   <Button onClick={(e) => handleApply(e, c)}>Confirm</Button>
                 </ModalFooter>
               </Modal>
-              <Button className="row" onClick={toggleapplyModal}>
+              <div className="row">
+                {user===c.user?(<Button>
+                Posted By You!
+              </Button>):(
+                result?(<Button>
+                  Already applied!
+                </Button>):(<Button onClick={toggleapplyModal}>
                 Apply
-              </Button>
+              </Button>)
+              )}
+              
               {user === c.user ? (
                 <Button href={`/appls/${c._id}`}>Applications</Button>
               ) : (
                 <p className="text-danger">Not Posted by You!</p>
               )}
+              </div>
             </>
           ) : (
             <p className="text-danger">Login to apply to this Competition</p>

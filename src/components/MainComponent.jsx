@@ -25,12 +25,32 @@ function MainComponent() {
         setCompe(error);
         setAppls(error);
       });
-  }, []);
+  }, [] );
   const updateAppl = (e, a, value) => {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "put",
       url: `http://localhost:3000/appls/${a}`,
+      data: {
+        "status": value,
+      },
+    };
+    axios(configuration)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        error = new Error();
+        console.log(error);
+      });
+    // prevent the form from refreshing the whole page
+    e.preventDefault();
+  };
+  const updateCompe = (e, c, value) => {
+    const configuration = {
+      headers: { Authorization: `bearer ${token}` },
+      method: "put",
+      url: `http://localhost:3000/compe/${c}`,
       data: {
         "status": value,
       },
