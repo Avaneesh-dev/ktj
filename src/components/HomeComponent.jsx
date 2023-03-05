@@ -103,10 +103,7 @@ function HomeComponent(props) {
           </CardBody>
           {user ? (
             <>
-              <Modal
-                isOpen={applyModal}
-                toggle={toggleapplyModal}
-              >
+              <Modal isOpen={applyModal} toggle={toggleapplyModal}>
                 <ModalHeader>
                   Please tell why should you be selected...
                 </ModalHeader>
@@ -127,8 +124,14 @@ function HomeComponent(props) {
                   <Button onClick={(e) => handleApply(e, c)}>Confirm</Button>
                 </ModalFooter>
               </Modal>
-              <Button className="row" onClick={toggleapplyModal}>Apply</Button>
-              <Button href={`/appls/${c._id}`}>Applications</Button>
+              <Button className="row" onClick={toggleapplyModal}>
+                Apply
+              </Button>
+              {user === c.user ? (
+                <Button href={`/appls/${c._id}`}>Applications</Button>
+              ) : (
+                <p className="text-danger">Not Posted by You!</p>
+              )}
             </>
           ) : (
             <p className="text-danger">Login to apply to this Competition</p>

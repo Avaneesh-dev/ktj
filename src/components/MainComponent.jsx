@@ -5,6 +5,10 @@ import HomeComponent from './HomeComponent'
 import LoginComponent from './LoginComponent'
 import ApplsComponent from './ApplsComponent'
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+const token = cookies.get("TOKEN");
+
 
 function MainComponent() {
   const [compe, setCompe] = useState([]);
@@ -21,11 +25,31 @@ function MainComponent() {
         setCompe(error);
         setAppls(error);
       });
-  });
+  }, []);
+  const updateAppl = (e, a, value) => {
+    const configuration = {
+      headers: { Authorization: `bearer ${token}` },
+      method: "put",
+      url: `http://localhost:3000/appls/${a}`,
+      data: {
+        "status": value,
+      },
+    };
+    axios(configuration)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        error = new Error();
+        console.log(error);
+      });
+    // prevent the form from refreshing the whole page
+    e.preventDefault();
+  };
   const CompeWithId = () => {
     let params = useParams();
     return(
-      <ApplsComponent appls={appls.filter((c) => c.compe===params.compeid)}/>
+      <ApplsComponent appls={appls.filter((c) => c.compe===params.compeid)} updateAppl={updateAppl}/>
     )
   }
   return (
@@ -33,7 +57,7 @@ function MainComponent() {
       <NavbarComponent/>
         <Routes>
           <Route index element={<HomeComponent compe={compe} />} />
-          <Route path="/home" element={<HomeComponent compe={compe} />} />                         
+          <Route path="/home" element={<HomeComponent compe={compe} appls={appls}/>} />                         
           <Route path="/login" element={<LoginComponent />} />                
           <Route path="/appls/:compeid" element={<CompeWithId />} />               
         </Routes>

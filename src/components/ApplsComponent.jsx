@@ -19,12 +19,12 @@ function ApplsComponent(props) {
         <CardBody>{appls.reason}</CardBody>
         <CardFooter>
           <div className="row">
-            <Button>Accept</Button>
-            <Button>Reject</Button>
+            <Button onClick={(e)=>props.updateAppl(e,appls._id, true)}>Accept</Button>
+            <Button onClick={(e)=>props.updateAppl(e,appls._id, false)}>Reject</Button>
           </div>
         </CardFooter>
       </Card>)
-  })}
+      })}
       </div>
     </>
   )}
