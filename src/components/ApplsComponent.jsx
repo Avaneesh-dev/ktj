@@ -8,6 +8,11 @@ import {
   } from "reactstrap";
 
 function ApplsComponent(props) {
+  let acceptedAppls=props.appls.filter((a)=> a.status===true)
+  if(props.compe.length){
+    if(acceptedAppls.length>=props.compe[0].members){
+    props.hideCompe(props.compe[0]._id)
+  }}
   return(
     <>
       <h1>Applications</h1>

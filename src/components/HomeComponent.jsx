@@ -76,7 +76,7 @@ function HomeComponent(props) {
       url: `http://localhost:3000/appls`,
       data: {
         userid,
-        compe: c._id,
+        compe: c,
         reason,
       },
     };
@@ -95,8 +95,7 @@ function HomeComponent(props) {
   const Competitions = props.compe.map((c) => {
     let result = props.appls.find(({ userid, compe }) => compe===c._id&&userid.name===user)
     return (
-      <div key={c._id}>
-        <Card>
+        <Card key={c._id}>
           <CardHeader>{c.name}</CardHeader>
           <CardBody>
             Number of Members needed: {c.members} <br />
@@ -122,7 +121,7 @@ function HomeComponent(props) {
                   </Form>
                 </ModalBody>
                 <ModalFooter>
-                  <Button onClick={(e) => handleApply(e, c)}>Confirm</Button>
+                  <Button onClick={(e) => {handleApply(e, c._id)}}>Confirm</Button>
                 </ModalFooter>
               </Modal>
               <div className="row">
@@ -152,7 +151,6 @@ function HomeComponent(props) {
             <p className="text-danger">Not Posted by You!</p>
           )}
         </Card>
-      </div>
     );
   });
   return (

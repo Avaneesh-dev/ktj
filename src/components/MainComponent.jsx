@@ -9,7 +9,6 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 const token = cookies.get("TOKEN");
 
-
 function MainComponent() {
   const [compe, setCompe] = useState([]);
   const [appls,setAppls] = useState([]);
@@ -46,40 +45,38 @@ function MainComponent() {
     // prevent the form from refreshing the whole page
     e.preventDefault();
   };
-  const updateCompe = (e, c, value) => {
-    const configuration = {
-      headers: { Authorization: `bearer ${token}` },
-      method: "put",
-      url: `http://localhost:3000/compe/${c}`,
-      data: {
-        "status": value,
-      },
-    };
-    axios(configuration)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        error = new Error();
-        console.log(error);
-      });
-    // prevent the form from refreshing the whole page
-    e.preventDefault();
-  };
-  const CompeWithId = () => {
+  
+  const CompeWithId = (props) => {
     let params = useParams();
+    const hideCompe = (c) => {
+      const configuration = {
+        headers: { Authorization: `bearer ${token}` },
+        method: "put",
+        url: `http://localhost:3000/compe/${c}`,
+        data: {
+          "show": false,
+        },
+      };
+      axios(configuration)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          error = new Error();
+          console.log(error);
+        });
+    };
     return(
-      <ApplsComponent appls={appls.filter((c) => c.compe===params.compeid)} updateAppl={updateAppl}/>
+      <ApplsComponent compe={compe.filter((c)=> c._id===params.compeid)} appls={appls.filter((c) => c.compe===params.compeid)} updateAppl={updateAppl} hideCompe={hideCompe} />
     )
   }
   return (
     <BrowserRouter>
       <NavbarComponent/>
         <Routes>
-          <Route index element={<HomeComponent compe={compe} />} />
-          <Route path="/home" element={<HomeComponent compe={compe} appls={appls}/>} />                         
+          <Route index element={<HomeComponent compe={compe.filter((c)=> c.show===true)} appls={appls}/>} />                       
           <Route path="/login" element={<LoginComponent />} />                
-          <Route path="/appls/:compeid" element={<CompeWithId />} />               
+          <Route path="/appls/:compeid" element={<CompeWithId compe={compe}/>} />               
         </Routes>
     </BrowserRouter>
   )
