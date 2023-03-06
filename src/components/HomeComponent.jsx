@@ -9,17 +9,16 @@ import {
   CardHeader,
   CardBody,
   Card,
-  Modal,
-  ModalFooter,
-  ModalHeader,
-  ModalBody,
+  UncontrolledAccordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionItem,
 } from "reactstrap";
 import Cookies from "universal-cookie";
 import axios from "axios";
 const cookies = new Cookies();
 
 function HomeComponent(props) {
-  const [applyModal, setapplyModal] = useState(false);
   const [name, setName] = useState("");
   const [members, setMembers] = useState(1);
   const [description, setDescription] = useState("");
@@ -27,8 +26,7 @@ function HomeComponent(props) {
   const token = cookies.get("TOKEN");
   const user = cookies.get("USER");
   const userid = cookies.get("USERID");
-  
-  const toggleapplyModal = () => setapplyModal(!applyModal);
+
   const handleSubmit = (e) => {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
@@ -88,69 +86,73 @@ function HomeComponent(props) {
         error = new Error();
         console.log(error);
       });
-    setapplyModal(!applyModal);
     // prevent the form from refreshing the whole page
     e.preventDefault();
   };
   const Competitions = props.compe.map((c) => {
-    let result = props.appls.find(({ userid, compe }) => compe===c._id&&userid.name===user)
+    let result = props.appls.find(
+      ({ userid, compe }) => compe === c._id && userid.name === user
+    );
     return (
-        <Card key={c._id}>
-          <CardHeader>{c.name}</CardHeader>
-          <CardBody>
-            Number of Members needed: {c.members} <br />
-            {c.description} <br />
-          </CardBody>
-          {user ? (
-            <>
-              <Modal isOpen={applyModal} toggle={toggleapplyModal}>
-                <ModalHeader>
-                  Please tell why should you be selected...
-                </ModalHeader>
-                <ModalBody>
-                  <Form>
-                    <FormGroup>
-                      <Input
-                        type="text"
-                        title="reason"
-                        placeholder="Reason"
-                        value={reason}
-                        onChange={(e) => setReason(e.target.value)}
-                      />
-                    </FormGroup>
-                  </Form>
-                </ModalBody>
-                <ModalFooter>
-                  <Button onClick={(e) => {handleApply(e, c._id)}}>Confirm</Button>
-                </ModalFooter>
-              </Modal>
-              <div className="row">
-                {user===c.user?(<Button>
-                Posted By You!
-              </Button>):(
-                result?(<Button>
-                  Already applied!
-                </Button>):(<Button onClick={toggleapplyModal}>
-                Apply
-              </Button>)
+      <Card key={c._id}>
+        <CardHeader>{c.name}</CardHeader>
+        <CardBody>
+          Number of Members needed: {c.members} <br />
+          {c.description} <br />
+        </CardBody>
+        {user ? (
+          <>    
+            <div className="row">
+              {user === c.user ? (
+                <Button>Posted By You!</Button>
+              ) : result ? (
+                <Button>Already applied!</Button>
+              ) : (
+                <UncontrolledAccordion key={c._id} defaultOpen="0">
+                  <AccordionItem>
+                    <AccordionHeader targetId="1">
+                      Apply to this Competition
+                    </AccordionHeader>
+                    <AccordionBody accordionId="1">
+                      <Form>
+                        <FormGroup>
+                          <Input
+                            type="text"
+                            title="reason"
+                            placeholder="Reason"
+                            value={reason}
+                            onChange={(e) => setReason(e.target.value)}
+                          />
+                        </FormGroup>
+                        <Button
+                          onClick={(e) => {
+                            handleApply(e, c._id);
+                          }}
+                        >
+                          Confirm
+                        </Button>
+                      </Form>
+                    </AccordionBody>
+                  </AccordionItem>
+                </UncontrolledAccordion>
               )}
-              
+
               {user === c.user ? (
                 <Button href={`/appls/${c._id}`}>Applications</Button>
               ) : (
                 <p className="text-danger">Not Posted by You!</p>
               )}
-              </div>
-            </>
-          ) : (
-            <p className="text-danger">Login to apply to this Competition</p>
-          )}
-          {user === c.user ? (
-            <Button onClick={(e) => handleDelete(e, c)}>Delete</Button>
-          ) : (
-            <p className="text-danger">Not Posted by You!</p>
-          )}
-        </Card>
+            </div>
+          </>
+        ) : (
+          <p className="text-danger">Login to apply to this Competition</p>
+        )}
+        {user === c.user ? (
+          <Button onClick={(e) => handleDelete(e, c)}>Delete</Button>
+        ) : (
+          <p className="text-danger">Not Posted by You!</p>
+        )}
+      </Card>
     );
   });
   return (
