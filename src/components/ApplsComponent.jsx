@@ -16,22 +16,26 @@ function ApplsComponent(props) {
   return(
     <>
       <h1>Applications</h1>
-      <div>
+      <div className="container p-4">
       {props.appls.map((appls)=>{
       return(
       <Card key={appls._id}> 
-        <CardHeader>{appls.userid.name}</CardHeader>
-        <CardBody>{appls.reason}</CardBody>
-        <CardFooter>
-          <div className="row">
+        <CardHeader className="h3 ">{appls.userid.name}</CardHeader>
+        <CardBody className="">{appls.reason}</CardBody>
+        <CardFooter className="text-right">
+          <div className="col-12 row">
+            <div className="col-4">
             {appls.status?(
-                <Button>Accepted</Button>)
+                <Button color="success">Accepted</Button>)
             :(
-            <Button onClick={(e)=>props.updateAppl(e,appls._id, true)}>Accept</Button>)}
+            <Button color="success" onClick={(e)=>props.updateAppl(e,appls._id, true)}>Accept</Button>)}
+            </div>
+            <div className="col-4">
             {appls.status===false?(
-                <Button>Rejected</Button>)
+                <Button color="danger">Rejected</Button>)
             :(
-            <Button onClick={(e)=>props.updateAppl(e,appls._id, false)}>Reject</Button>)}
+            <Button color="danger" onClick={(e)=>props.updateAppl(e,appls._id, false)}>Reject</Button>)}
+            </div>
           </div>
         </CardFooter>
       </Card>)

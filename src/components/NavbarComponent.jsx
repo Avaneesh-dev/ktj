@@ -13,26 +13,31 @@ function NavbarComponent(props) {
     console.log("logging out");
   }
   return (
+    <>
     <div>
-      <Navbar color='inherit' light expand="md" className="col-12 navtext">
-        <NavbarBrand className="col-md-3 col-sm-6">Get A Team</NavbarBrand>
+      <Navbar color='inherit' dark expand="md" className="col-12 ">
+        <NavbarBrand className="col-md-3 col-sm-6 col-xs-8 fw-bold">
+          <i className="fa fa-users fa-lg p-3"></i>
+          Get A Team
+        </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} />
         <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar className='col-md-9 text-center'>
-            <NavItem className="col-md-2">
-              <NavLink href="/">HOME</NavLink>             
+          <Nav navbar className='col-md-12 d-flex justify-content-end'>
+            <NavItem className="col-md-3 d-flex justify-content-center">
+              <NavLink href="/"><i className='fa fa-home fa-lg p-2'></i> Home</NavLink>             
             </NavItem>          
-            <NavItem className="col-md-2">
-            <NavLink href="/login">{userName?<div>{userName}</div>:<div>LOGIN</div>}
+            <NavItem className="col-md-3 d-flex justify-content-center">
+            <NavLink href="/login">{userName?<div className='text-capitalize'><i className='fa fa-user fa-lg p-2'></i> {userName}</div>:<div><i className='fa fa-sign-in fa-lg p-2'></i> Login </div>}
             </NavLink>              
             </NavItem>
-            <NavItem className="col-md-2">
-              <NavLink onClick={(e)=>{logout()}}>Logout</NavLink>             
+            <NavItem className="col-md-3 d-flex justify-content-center">
+              <NavLink onClick={(e)=>{logout()}}><i className='fa fa-sign-out fa-lg p-2'></i>Logout</NavLink>             
             </NavItem>          
           </Nav>
         </Collapse>
       </Navbar>
     </div>
+    </>
   )
 }
 

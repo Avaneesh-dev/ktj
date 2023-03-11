@@ -4,6 +4,7 @@ import NavbarComponent from './NavbarComponent'
 import HomeComponent from './HomeComponent'
 import LoginComponent from './LoginComponent'
 import ApplsComponent from './ApplsComponent'
+import Footer from './FooterComponent'
 import axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -78,6 +79,7 @@ function MainComponent() {
           <Route path="/login" element={<LoginComponent />} />                
           <Route path="/appls/:compeid" element={<CompeWithId compe={compe}/>} />               
         </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }

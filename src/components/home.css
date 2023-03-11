@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'thickfont';
+    src: url(../../fonts/Poppins-BoldItalic.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'thinfont';
+    src: url(../../fonts/Poppins-Thin.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'mediumfont';
+    src: url(../../fonts/Poppins-Medium.ttf) format('truetype');
+}
+.bc{
+    background-color: rgb(192, 225, 225);
+    font-family: 'mediumfont';
+}
+#header{
+    font-family: 'thinfont';
+    font-size:1.9em;
+    color: white
+}
