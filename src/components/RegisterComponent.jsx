@@ -25,25 +25,24 @@ function RegisterComponent() {
         e.preventDefault();
         
       }
-  return (
-    
+  return (    
     <div>
-        <div>
+        <div className='col-9'>
         <h2>Register</h2>
       <Form onSubmit={(e)=>handleSubmit(e)}>
-        <Form.Group controlId="formRegistrationName">
+        <Form.Group className="my-2" controlId="formRegistrationName">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}/>
+          <Form.Control type="text" placeholder="Enter Unique Username" value={name} onChange={(e) => setName(e.target.value)}/>
         </Form.Group>
 
         {/* password */}
-        <Form.Group controlId="formRegistrationPassword">
+        <Form.Group className="my-2" controlId="formRegistrationPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </Form.Group>
 
         {/* submit button */}
-        <Button variant="primary" type="submit"  onClick={(e) => handleSubmit(e)}>
+        <Button className="my-2" variant="primary" type="submit"  onClick={(e) => handleSubmit(e)}>
           Submit
         </Button>
         {login ? (
