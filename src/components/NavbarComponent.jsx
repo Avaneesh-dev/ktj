@@ -17,7 +17,7 @@ function NavbarComponent(props) {
     <div>
       <Navbar color='inherit' dark expand="md" className="col-12 ">
         <NavbarBrand className="col-md-3 col-sm-6 col-xs-8 fw-bold">
-          <i className="fa fa-users fa-lg p-3"></i>
+        <img src="/dreamteamlogo.png" height="50" width="50" alt="Get A Team" />
           Get A Team
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} />
