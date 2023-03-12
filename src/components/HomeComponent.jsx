@@ -36,7 +36,7 @@ function HomeComponent(props) {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "post",
-      url: `http://${Baseurl}/compe`,
+      url: `https://${Baseurl}/compe`,
       data: {
         user,
         name,
@@ -59,7 +59,7 @@ function HomeComponent(props) {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "delete",
-      url: `http://${Baseurl}/compe/${c._id}`,
+      url: `https://${Baseurl}/compe/${c._id}`,
     };
     axios(configuration)
       .then((result) => {
@@ -76,7 +76,7 @@ function HomeComponent(props) {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "post",
-      url: `http://${Baseurl}/appls`,
+      url: `https://${Baseurl}/appls`,
       data: {
         userid,
         compe: c,

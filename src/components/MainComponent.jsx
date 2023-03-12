@@ -15,7 +15,7 @@ function MainComponent() {
   const [compe, setCompe] = useState([]);
   const [appls,setAppls] = useState([]);
   useEffect(() => {
-    let endpoints = [`http://${Baseurl}/compe`, `http://${Baseurl}/appls`]
+    let endpoints = [`https://${Baseurl}/compe`, `https://${Baseurl}/appls`]
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then(([{data:compe}, {data: appls}]) => {
         setCompe(compe)
@@ -31,7 +31,7 @@ function MainComponent() {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "put",
-      url: `http://${Baseurl}/appls/${a}`,
+      url: `https://${Baseurl}/appls/${a}`,
       data: {
         "status": value,
       },
@@ -54,7 +54,7 @@ function MainComponent() {
       const configuration = {
         headers: { Authorization: `bearer ${token}` },
         method: "put",
-        url: `http://${Baseurl}/compe/${c}`,
+        url: `https://${Baseurl}/compe/${c}`,
         data: {
           "show": false,
         },
