@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import blobs from "blobs";
+import { Baseurl } from "./Baseurl";
 import "./home.css";
 import {
   Button,
@@ -36,7 +36,7 @@ function HomeComponent(props) {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "post",
-      url: "http://localhost:3000/compe",
+      url: `http://${Baseurl}/compe`,
       data: {
         user,
         name,
@@ -59,7 +59,7 @@ function HomeComponent(props) {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "delete",
-      url: `http://localhost:3000/compe/${c._id}`,
+      url: `http://${Baseurl}/compe/${c._id}`,
     };
     axios(configuration)
       .then((result) => {
@@ -76,7 +76,7 @@ function HomeComponent(props) {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "post",
-      url: `http://localhost:3000/appls`,
+      url: `http://${Baseurl}/appls`,
       data: {
         userid,
         compe: c,

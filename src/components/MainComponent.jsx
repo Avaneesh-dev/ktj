@@ -5,6 +5,7 @@ import HomeComponent from './HomeComponent'
 import LoginComponent from './LoginComponent'
 import ApplsComponent from './ApplsComponent'
 import Footer from './FooterComponent'
+import { Baseurl } from './Baseurl'
 import axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -14,7 +15,7 @@ function MainComponent() {
   const [compe, setCompe] = useState([]);
   const [appls,setAppls] = useState([]);
   useEffect(() => {
-    let endpoints = ['http://localhost:3000/compe', 'http://localhost:3000/appls']
+    let endpoints = [`http://${Baseurl}/compe`, `http://${Baseurl}/appls`]
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then(([{data:compe}, {data: appls}]) => {
         setCompe(compe)
@@ -30,7 +31,7 @@ function MainComponent() {
     const configuration = {
       headers: { Authorization: `bearer ${token}` },
       method: "put",
-      url: `http://localhost:3000/appls/${a}`,
+      url: `http://${Baseurl}/appls/${a}`,
       data: {
         "status": value,
       },
@@ -53,7 +54,7 @@ function MainComponent() {
       const configuration = {
         headers: { Authorization: `bearer ${token}` },
         method: "put",
-        url: `http://localhost:3000/compe/${c}`,
+        url: `http://${Baseurl}/compe/${c}`,
         data: {
           "show": false,
         },
