@@ -1,25 +1,27 @@
 import React, {useState} from 'react'
 import {Form, Button} from "react-bootstrap";
+import { Baseurl } from './Baseurl';
 import axios from "axios";
 function RegisterComponent() {
     const [name, setName] = useState("");
     const [password, setPassword] =useState("");
-    const [login, setLogin] = useState(false);
+    const [register, setRegister] = useState(false);
 
     const handleSubmit = (e) => {
         // prevent the form from refreshing the whole page
         const configuration = {
             method: "post",
-            url: "http://localhost:3000/register",
+            url: `http://${Baseurl}/register`,
             data: {
               name,
               password,
             },
           };
           axios(configuration)
-          .then((result) => {setLogin(true); console.log(result)})
+          .then((result) => {setRegister(true); console.log(result)})
           .catch((error) => {
             error = new Error();
+            alert(error);
             console.log(error);
           });
         e.preventDefault();
@@ -45,7 +47,7 @@ function RegisterComponent() {
         <Button className="my-2" variant="primary" type="submit"  onClick={(e) => handleSubmit(e)}>
           Submit
         </Button>
-        {login ? (
+        {register ? (
           <p className="text-success">You Are Registered Successfully</p>
         ) : (
           <p className="text-danger">If Not Yet Registered, Please Fill The Form.</p>

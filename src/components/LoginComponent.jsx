@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import RegisterComponent from "./RegisterComponent";
+import { Baseurl } from "./Baseurl";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 function LoginComponent() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [register, setRegister] = useState(false);
   const userName = cookies.get("USER");
 
   const handleSubmit = (e) => {
     // prevent the form from refreshing the whole page
     const configuration = {
       method: "post",
-      url: "http://localhost:3000/login",
+      url: `http://${Baseurl}/login`,
       data: {
         name,
         password,
@@ -22,8 +22,6 @@ function LoginComponent() {
     };
     axios(configuration)
       .then((result) => {
-        console.log(result.data);
-        setRegister(true);
         // set the cookie
         cookies.set("TOKEN", result.data.token, {
           path: "/",
@@ -37,6 +35,7 @@ function LoginComponent() {
       })
       .catch((error) => {
         console.log(error);
+        alert(error);
         error = new Error();
       });
     e.preventDefault();
