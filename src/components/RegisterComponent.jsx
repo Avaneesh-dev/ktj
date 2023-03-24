@@ -11,7 +11,7 @@ function RegisterComponent() {
         // prevent the form from refreshing the whole page
         const configuration = {
             method: "post",
-            url: `http://${Baseurl}/register`,
+            url: `https://${Baseurl}/register`,
             data: {
               name,
               password,

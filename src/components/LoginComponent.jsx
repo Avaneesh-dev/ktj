@@ -14,7 +14,7 @@ function LoginComponent() {
     // prevent the form from refreshing the whole page
     const configuration = {
       method: "post",
-      url: `http://${Baseurl}/login`,
+      url: `https://${Baseurl}/login`,
       data: {
         name,
         password,
